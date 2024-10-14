@@ -3,20 +3,16 @@
 
 <head>
   <title>Visualisation of Energy Data in Australia</title>
-  <!-- Import Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-  <!-- Import pure.css -->
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
     integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Import CSS file -->
   <link rel="stylesheet" type="text/css" href="style.css" media="all">
 
-  <!-- Google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -61,12 +57,12 @@
             </p>
           </div>
           <div class="pure-u-1-2" id="map_hover">
-            <p style="text-align: justify;">ℹ️ <i>Use the "Fuel Type" dropdown to highlight the change in rank for the
-                chosen fuel type every year from 1999 to 2023.</i></p>
-            <p style="text-align: justify;">ℹ️ <i>Use the "Start Year" slider to adjust the period from which the
-                rankings are being looked at.</i></p>
-            <p style="text-align: justify;"><i>Note: </i>Bioenergy, unlike the other forms of renewable energy
-              included above, is a greenhouse gas emitting fuel source.</p>
+            <p style="text-align: justify;">ℹ️ Use the "Energy Type" dropdown to highlight the change in rank for the
+              chosen energy type every year from 1999 to 2023.</p>
+            <p style="text-align: justify;">ℹ️ Use the "Start Year" slider to adjust the period from which the
+              rankings are being looked at.</p>
+            <p style="text-align: justify;">Note: Bioenergy, unlike the other forms of renewable energy
+              included above, is a greenhouse gas emitting energy source.</p>
           </div>
         </div>
       </div>
@@ -74,40 +70,22 @@
   </div>
 
   <div class="custom-text-container"
-    style="font-family: 'Cabin', sans-serif; font-size: 15px; color: grey; font-style: italic; position: absolute; top: 678px; left: 500px;">
-    Hydro and Bioenergy have declined in prominence from 1999 to 2023, while Solar and Wind, previously on<br>the back
-    burner, have displaced them to become the two pre-eminent renewable energy sources in Australia.
+    style="font-family: 'Cabin', sans-serif; font-size: 15px; color: grey; font-style: italic; position: absolute; top: 670px; left: 550px;">
+    Hydro and Bioenergy have declined in prominence from 1999 to 2023, while<br>Solar and Wind, previously on the back
+    burner, have displaced them to<br>become the two pre-eminent renewable energy sources in Australia.
   </div>
 
   <div class="custom-line-diagonal"></div>
-  <div class="custom-line-diagonal-2"></div>
 
   <style>
     .custom-line-diagonal {
       position: absolute;
-      top: 375px;
-      left: 1200px;
-      width: 355px;
+      top: 330px;
+      left: 1190px;
+      width: 410px;
       height: 2px;
       background-color: grey;
-      transform: rotate(122deg);
-      /* This will rotate the line 45 degrees */
-      transform-origin: 0 0;
-      /* Set the rotation starting point */
-    }
-
-    .custom-line-diagonal-2 {
-      position: absolute;
-      top: 390px;
-      /* Adjust the top position to where you want this line */
-      left: 1200px;
-      /* Adjust the left position */
-      width: 315px;
-      /* Adjust the width of the line */
-      height: 2px;
-      background-color: grey;
-      transform: rotate(115deg);
-      /* Adjust the rotation angle for the new line */
+      transform: rotate(125deg);
       transform-origin: 0 0;
     }
   </style>
@@ -133,7 +111,7 @@
               challenges in shifting towards a more sustainable energy future despite global and national policy
               shifts aimed at reducing carbon emissions.</p>
             <br>
-            <p style="text-align: justify;">ℹ️ <i>Use the drop down to highlight an energy type</i></p>
+            <p style="text-align: justify;">ℹ️ Use the "Energy Type" dropdown to highlight an energy type.</p>
           </div>
         </div>
       </div>
@@ -183,10 +161,15 @@
           urbanisation and industrialisation expand. Sectors like mining also show a notable increase, likely driven
           by Australia's resource extraction industries. In contrast, sectors such as commercial and other remain
           relatively flat, suggesting limited growth in energy needs within these areas.</p>
-        <p style="text-align: justify;">ℹ️ <i>Drag the slider to adjust the start dates for the area charts</i></p>
+        <p style="text-align: justify;"><br>ℹ️ Drag the "Start Year" slider to adjust the start dates for the<br>area charts.</p>
 
       </div>
     </div>
+  </div>
+
+  <div class="custom-text-container"
+    style="font-family: 'Cabin', sans-serif; font-size: 15px; color: grey; font-style: italic; position: absolute; top: 2230px; left: 170px;">
+    States with lower population density tend<br>to have higher per capita energy consumption.
   </div>
 
   <div class="line">
@@ -211,7 +194,7 @@
           <div class="pure-u-1-2">
             <p style="text-align: justify;">This visualisation highlights the substantial differences in energy
               flow
-              metrics across non-renewable fuel types—coal, natural gas, and oil—in Australia from 1973 to 2022.
+              metrics across non-renewable energy types—coal, natural gas, and oil—in Australia from 1973 to 2022.
               Coal dominates both production and export volumes, reflecting Australia’s strong position as a major
               exporter of coal. Natural gas shows a steady increase in exports over time, pointing to its rising
               importance in international energy markets. In contrast, oil is characterised by higher levels of
@@ -224,17 +207,16 @@
               and the global demand for its energy resources.</p>
           </div>
           <div class="pure-u-1-2" id="map_hover">
-            <p style="text-align: justify;">ℹ️ <i>This visualisation shows energy flow metrics for coal, natural gas,
-                and oil in Australia from 1973 to 2022. Each line represents a single year during that period. The
-                vertical axis shows energy values in petajoules, while the horizontal axis covers four key
-                energy flow metrics: production, consumption, import, and export. To interpret the chart, follow a line
-                from left to right to see how each fuel type's energy flows
-                through the system for a given year. For example, a line starting high on the left and dipping toward
-                the right suggests a high level of production but lower consumption or exports. This approach allows you
-                to see trends, such as shifts in the balance between domestic consumption and international trade for
-                each fuel type.</i></p>
-            <p style="text-align: justify;">ℹ️ <i>Use the "Fuel Type" dropdown to highlight the flow for the
-                chosen fuel type for the period spanning 1973 to 2022.</i></p>
+            <p style="text-align: justify;">ℹ️ This visualisation shows energy flow metrics for coal, natural gas,
+              and oil in Australia from 1973 to 2022. Each line represents a<br>single year during that period. The
+              vertical axis shows energy values in petajoules, while the horizontal axis covers four key
+              energy flow metrics: production, consumption, import, and export. To interpret the chart, follow a line
+              from left to right to see how each energy type's energy flows
+              through the system for a given year. For example, a line starting high on the left and dipping toward
+              the right suggests<br>a high level of production but lower consumption or exports.</p>
+            <p style="text-align: justify;">ℹ️ Use the "Energy Type" dropdown to highlight the flow for the
+              chosen energy type for the period spanning 1973 to 2022.</p>
+            <p style="text-align: justify;">ℹ️ Hover over a vertical axis to see precise figures.</p>
           </div>
         </div>
       </div>
@@ -242,27 +224,23 @@
   </div>
 
   <div class="custom-text-container"
-    style="font-family: 'Cabin', sans-serif; font-size: 15px; color: grey; font-style: italic; position: absolute; top: 3280px; left: 380px;">
-    Coal plays a crucial role across all energy flow metrics in Australia. It dominates both production and export,
-    while also accounting<br>for substantial domestic consumption. Despite growing global pressure to reduce reliance on
-    fossil fuels, coal continues to be a<br>major contributor to both Australia's energy exports and its domestic energy
-    consumption.
+    style="font-family: 'Cabin', sans-serif; font-size: 15px; color: grey; font-style: italic; position: absolute; top: 3313px; left: 700px;">
+    Coal plays a crucial role across all energy flow metrics<br>in Australia. It dominates both production and export,
+    while also<br>accounting for substantial domestic consumption.
   </div>
 
-  <div class="custom-line-diagonal-3"></div>
+  <div class="custom-line-diagonal-2"></div>
 
   <style>
-    .custom-line-diagonal-3 {
+    .custom-line-diagonal-2 {
       position: absolute;
-      top: 2957px;
-      left: 1173px;
+      top: 2990px;
+      left: 1175px;
       width: 350px;
       height: 2px;
       background-color: grey;
       transform: rotate(115deg);
-      /* This will rotate the line 45 degrees */
       transform-origin: 0 0;
-      /* Set the rotation starting point */
     }
   </style>
 
@@ -271,21 +249,21 @@
       <div class="column">
         <div class="pure-g">
           <div class="pure-u-1-2">
-            <p style="text-align: justify;">ℹ️ <i>The following acronyms are used to represent the
-                states/territories: NSW - New South Wales | VIC - Victoria | QLD - Queensland | WA - Western
-                Australia | SA - South Australia | TAS - Tasmania | NT - Northern Territory</i></p>
+            <p style="text-align: justify;">ℹ️ The following acronyms are used to represent the
+              states/territories: NSW - New South Wales | VIC - Victoria | QLD - Queensland | WA - Western
+              Australia | SA - South Australia | TAS - Tasmania | NT - Northern Territory</p>
             <p style="text-align: justify;">This chart highlights that coal and gas dominate Australia's energy
               consumption across most states, but there are notable variations. For instance, NSW and Queensland
               show a significant reliance on coal, with little diversification into renewables. Western Australia
               and South Australia, on the other hand, have a more balanced consumption of gas and oil, although
-              coal still plays a role. States like Tasmania and South Australia have more renewables in their mix,
+              coal still plays a role. States like Tasmania<br>and South Australia have more renewables in their mix,
               indicating a stronger push towards clean energy compared to the eastern states. However, renewables
               overall still constitute a small portion of the national energy consumption mix, suggesting that
               despite Australia’s efforts to increase renewable energy sources, fossil fuels, particularly coal
               and gas, remain entrenched in the energy landscape. This uneven distribution reflects regional
               variations in resource availability, energy policies, and the pace of transition to cleaner energy
               sources.</p>
-            <p style="text-align: justify;"><i>Note: </i>Despite having smaller populations than Victoria, QLD and WA
+            <p style="text-align: justify;">Note: Despite having smaller populations than Victoria, QLD and WA
               consume more energy than Australia's second largest state by population.</p>
           </div>
           <div class="pure-u-1-2" id="map_hover">

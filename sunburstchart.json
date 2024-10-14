@@ -111,7 +111,7 @@
           "align": {"value": "center"},
           "baseline": {"value": "middle"},
           "fill": {"value": "white"},
-          "fontSize": {"value": 10},
+          "fontSize": {"value": 12},
           "angle": {
             "signal": "datum.depth == 0 ? 0 : (datum.a0 + datum.a1) / 2 * 180 / PI - 90"
           }

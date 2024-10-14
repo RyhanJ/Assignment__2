@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Proportion of Fuel Production by Type in Australia (1983-2023)",
+    "text": "Proportion of Energy Production by Type in Australia (1983-2023)",
     "fontWeight": "bold",
     "offset": 10,
     "anchor": "middle"
   },
   "data": {
-    "url": "https://raw.githubusercontent.com/RyhanJ/Assignment2/refs/heads/main/normalisedstackedareachart.csv"
+    "url": "https://raw.githubusercontent.com/RyhanJ/Assignment2/refs/heads/main/stackedareachart.csv"
   },
   "width": 475,
   "height": 300,
@@ -49,7 +49,7 @@
           "Black coal",
           "Brown coal",
           "Natural gas",
-          "Oil and LPG",
+          "Oil",
           "Renewables"
         ],
         "labels": [
@@ -57,10 +57,10 @@
           "Black coal",
           "Brown coal",
           "Natural gas",
-          "Oil and LPG",
+          "Oil",
           "Renewables"
         ],
-        "name": "Fuel Type: "
+        "name": "Energy Type: "
       }
     }
   ],
@@ -83,11 +83,10 @@
         },
         "color": {
           "field": "Fuel_Type",
-          "title": "Fuel Type",
+          "title": "Energy Type",
           "scale": {"scheme": "tableau20"},
           "legend": {
-            "orient": "bottom",
-            "labelFontSize": 11
+            "orient": "bottom"
           }
         },
         "opacity": {
@@ -101,7 +100,7 @@
           {
             "field": "Fuel_Type",
             "type": "nominal",
-            "title": "Fuel Type",
+            "title": "Energy Type",
             "format": ""
           },
           {

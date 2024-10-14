@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Proportion of Fuel Production by Type in Australia (1983-2023)",
+    "text": "Energy Consumption by Sector in Australia Over Time (1983-2022)",
     "fontWeight": "bold",
     "offset": 10,
     "anchor": "middle"
@@ -29,7 +29,9 @@
     },
     "header": {
       "labelFont": "Cabin",
-      "titleFont": "Cabin"
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
     },
     "text": {
       "font": "Cabin",
@@ -95,21 +97,21 @@
     },
     "tooltip": [
       {
-        "type": "quantitative",
-        "field": "Consumption",
-        "title": "Consumption (Petajoules):",
-        "format": ",.0f"
+        "type": "nominal",
+        "field": "Sector",
+        "title": "Sector"
       },
       {
         "type": "temporal",
         "field": "Year",
         "format": "%Y",
-        "title": "Year:"
+        "title": "Year"
       },
       {
-        "type": "nominal",
-        "field": "Sector",
-        "title": "Sector:"
+        "type": "quantitative",
+        "field": "Consumption",
+        "title": "Consumption (Petajoules)",
+        "format": ",.0f"
       }
     ]
   }
