@@ -1,0 +1,113 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Per Capita Energy Consumption by Australian State in 2024",
+    "fontWeight": "bold",
+    "anchor": "middle",
+    "color": "black"
+  },
+  "width": 485,
+  "height": 500,
+  "background": null,
+  "config": {
+    "font": "Cabin",
+    "title": {
+      "font": "Cabin",
+      "fontSize": 17
+    },
+    "axis": {
+      "labelFont": "Cabin",
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
+    },
+    "legend": {
+      "labelFont": "Cabin",
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
+    },
+    "header": {
+      "labelFont": "Cabin",
+      "titleFont": "Cabin"
+    },
+    "text": {
+      "font": "Cabin",
+      "fontSize": 12
+    }
+  },
+  "layer": [
+    {
+      "data": {"graticule": true},
+      "mark": {
+        "type": "geoshape",
+        "stroke": "lightgray",
+        "strokeWidth": 0.5
+      },
+      "projection": {
+        "type": "albers",
+        "rotate": [-137, 0],
+        "center": [0, -27.5],
+        "parallels": [-18, -36],
+        "scale": 770,
+        "translate": [285, 260]
+      },
+      "encoding": {},
+      "interactive": false
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/sdef0001/assignment1/main/states.geojson",
+        "format": {"type": "json", "property": "features"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.STATE_NAME",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/RyhanJ/Week9Homework/refs/heads/main/map.csv",
+              "format": {"type": "csv"}
+            },
+            "key": "State_Name",
+            "fields": ["Energy_Consumption", "Population"]
+          }
+        },
+        {
+          "calculate": "toNumber(datum.Energy_Consumption) / toNumber(datum.Population)",
+          "as": "Per_Capita_Consumption"
+        }
+      ],
+      "projection": {
+        "type": "albers",
+        "rotate": [-137, 0],
+        "center": [0, -27.5],
+        "parallels": [-18, -36],
+        "scale": 770,
+        "translate": [285, 260]
+      },
+      "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 2},
+      "encoding": {
+        "color": {
+          "field": "Per_Capita_Consumption",
+          "type": "quantitative",
+          "scale": {"scheme": "oranges"},
+          "legend": {
+            "orient": "bottom",
+            "gradientLength": 485,
+            "title": "Per Capita Consumption (Petajoules)",
+            "titleLimit": 300
+          }
+        },
+        "tooltip": [
+          {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
+          {
+            "field": "Per_Capita_Consumption",
+            "type": "quantitative",
+            "title": "Per Capita Use (Petajoules)",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ]
+}

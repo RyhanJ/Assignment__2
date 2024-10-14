@@ -1,0 +1,116 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Proportion of Fuel Production by Type in Australia (1983-2023)",
+    "fontWeight": "bold",
+    "offset": 10,
+    "anchor": "middle"
+  },
+  "width": 400,
+  "height": 55,
+  "background": null,
+  "config": {
+    "font": "Cabin",
+    "title": {
+      "font": "Cabin",
+      "fontSize": 17
+    },
+    "axis": {
+      "labelFont": "Cabin",
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
+    },
+    "legend": {
+      "labelFont": "Cabin",
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
+    },
+    "header": {
+      "labelFont": "Cabin",
+      "titleFont": "Cabin"
+    },
+    "text": {
+      "font": "Cabin",
+      "fontSize": 12
+    }
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/RyhanJ/Assignment2/refs/heads/main/trellisareachart.csv"
+  },
+  "params": [
+    {
+      "name": "start_year",
+      "value": 1983,
+      "bind": {
+        "input": "range",
+        "min": 1983,
+        "max": 2021,
+        "step": 1,
+        "name": "Start Year: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "year(datum.Year) >= start_year"
+    }
+  ],
+  "mark": "area",
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "temporal",
+      "title": "Year",
+      "axis": {
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "Consumption",
+      "type": "quantitative",
+      "title": null,
+      "axis": {
+        "grid": false,
+        "tickCount": 1
+      },
+      "scale": {
+        "domainMin": 0,
+        "domainMax": 2000
+      }
+    },
+    "color": {
+      "field": "Sector",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "scheme": "tableau20"
+      }
+    },
+    "row": {
+      "field": "Sector",
+      "type": "nominal",
+      "title": "Consumption (Petajoules) by Sector"
+    },
+    "tooltip": [
+      {
+        "type": "quantitative",
+        "field": "Consumption",
+        "title": "Consumption (Petajoules):",
+        "format": ",.0f"
+      },
+      {
+        "type": "temporal",
+        "field": "Year",
+        "format": "%Y",
+        "title": "Year:"
+      },
+      {
+        "type": "nominal",
+        "field": "Sector",
+        "title": "Sector:"
+      }
+    ]
+  }
+}

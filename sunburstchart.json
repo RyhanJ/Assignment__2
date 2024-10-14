@@ -1,0 +1,183 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Energy consumption by state and energy source in Australia",
+  "title": {
+    "text": "Energy Consumption by State in Australia",
+    "offset": 15
+  },
+  "width": 480,
+  "height": 450,
+  "config": {
+    "font": "Cabin",
+    "title": {
+      "font": "Cabin",
+      "fontSize": 17
+    },
+    "axis": {
+      "labelFont": "Cabin",
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
+    },
+    "legend": {
+      "labelFont": "Cabin",
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
+    },
+    "header": {
+      "labelFont": "Cabin",
+      "titleFont": "Cabin"
+    },
+    "text": {
+      "font": "Cabin",
+      "fontSize": 12
+    }
+  },
+  "padding": 5,
+  "autosize": {"type": "pad"},
+  "data": [
+    {
+      "name": "tree",
+      "url": "https://raw.githubusercontent.com/RyhanJ/Assignment2/refs/heads/main/sunburstchart.csv",
+      "format": {"type": "csv"},
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "partition",
+          "field": "size",
+          "sort": {"field": "size"},
+          "size": [{"signal": "2 * PI"}, {"signal": "width / 2"}],
+          "as": ["a0", "r0", "a1", "r1", "depth", "children"]
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "tree", "field": "depth"},
+      "range": {"scheme": "tableau20"}
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "arc",
+      "from": {"data": "tree"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "width / 2"},
+          "y": {"signal": "height / 2"},
+          "fill": {"scale": "color", "field": "depth"},
+          "tooltip": {
+            "signal": "datum.depth == 0 ? {'Country': datum.name, 'Consumption (Petajoules)': format(datum.sizecountry, ',.0f')} : datum.depth == 1 ? {'State': datum.name, 'Consumption (Petajoules)': format(datum.sizestate, ',.0f')} : {'Energy Type': datum.name, 'Consumption (Petajoules)': format(datum.size, ',.0f')}"
+          }
+        },
+        "update": {
+          "startAngle": {"field": "a0"},
+          "endAngle": {"field": "a1"},
+          "innerRadius": {"field": "r0"},
+          "outerRadius": {"field": "r1"},
+          "stroke": {"value": "white"},
+          "strokeWidth": {"value": 0.5},
+          "zindex": {"value": 0}
+        },
+        "hover": {
+          "stroke": {"value": "red"},
+          "strokeWidth": {"value": 2},
+          "zindex": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "tree"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "width / 2"},
+          "y": {"signal": "height / 2"},
+          "radius": {"signal": "datum.depth == 0 ? 0 : (datum.r0 + datum.r1) / 2"},
+          "theta": {"signal": "datum.depth == 0 ? 0 : (datum.a0 + datum.a1) / 2"},
+          "text": {
+            "signal": "datum.depth == 0 ? datum.name : (datum.depth == 1 ? datum.name : (datum.size > 60 ? datum.name : ''))"
+          },
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fill": {"value": "white"},
+          "fontSize": {"value": 10},
+          "angle": {
+            "signal": "datum.depth == 0 ? 0 : (datum.a0 + datum.a1) / 2 * 180 / PI - 90"
+          }
+        }
+      }
+    },
+{
+  "type": "text",
+  "encode": {
+    "enter": {
+      "x": {"value": 250},
+      "y": {"value": 480},
+      "text": {
+        "value": "Despite having smaller populations than VIC,"
+      },
+      "align": {"value": "center"},
+      "baseline": {"value": "middle"},
+      "fontSize": {"value": 15},
+      "fill": {"value": "grey"},
+      "fontStyle": {"value": "italic"}
+    }
+  }
+},
+{
+  "type": "rule",
+  "encode": {
+    "enter": {
+      "x": {"value": 125},
+      "x2": {"value": 180},
+      "y": {"signal": 200},
+      "y2": {"value": 475},
+      "stroke": {"value": "grey"},
+      "strokeWidth": {"value": 1.5}
+    }
+  }
+},
+{
+  "type": "rule",
+  "encode": {
+    "enter": {
+      "x": {"value": 190},
+      "x2": {"value": 200},
+      "y": {"signal": 350},
+      "y2": {"value": 475},
+      "stroke": {"value": "grey"},
+      "strokeWidth": {"value": 1.5}
+    }
+  }
+},
+{
+  "type": "text",
+  "encode": {
+    "enter": {
+      "x": {"value": 250},
+      "y": {"value": 495},
+      "text": {
+        "value": "QLD and WA consume more energy."
+      },
+      "align": {"value": "center"},
+      "baseline": {"value": "middle"},
+      "fontStyle": {"value": "italic"},
+      "fontSize": {"value": 15},
+      "fill": {"value": "grey"}
+    }
+  }
+}
+
+  ]
+}

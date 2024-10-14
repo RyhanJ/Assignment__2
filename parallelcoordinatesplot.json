@@ -1,0 +1,298 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A parallel coordinate plot with a custom axis order: Production -> Consumption -> Import -> Export.",
+  "title": {
+    "text": "Energy Flow Metrics for Non-Renewable Fuel Types (1973–2022)",
+    "offset": 10
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/RyhanJ/Assignment2/refs/heads/main/parallelcoordinateplot.csv"
+  },
+  "width": 1100,
+  "height": 300,
+  "background": null,
+  "config": {
+    "font": "Cabin",
+    "title": {
+      "font": "Cabin",
+      "fontSize": 17
+    },
+    "axis": {
+      "labelFont": "Cabin",
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
+    },
+    "legend": {
+      "labelFont": "Cabin",
+      "labelFontSize": 13,
+      "titleFont": "Cabin",
+      "titleFontSize": 15
+    },
+    "header": {
+      "labelFont": "Cabin",
+      "titleFont": "Cabin"
+    },
+    "text": {
+      "font": "Cabin",
+      "fontSize": 12
+    },
+    "axisX": {
+      "domain": false,
+      "labelAngle": 0,
+      "tickColor": "#ccc",
+      "title": "Energy Flow Metrics",
+      "grid": false
+    },
+    "view": {
+      "stroke": null
+    },
+    "style": {
+      "label": {
+        "baseline": "middle",
+        "align": "right",
+        "dx": -5
+      },
+      "tick": {
+        "orient": "horizontal"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "fuel_selection",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All",
+          "Coal",
+          "Natural gas",
+          "Oil"
+        ],
+        "name": "Fuel Type: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "toNumber(datum['Production'])",
+      "as": "Production"
+    },
+    {
+      "calculate": "toNumber(datum['Consumption'])",
+      "as": "Consumption"
+    },
+    {
+      "calculate": "toNumber(datum['Import'])",
+      "as": "Import"
+    },
+    {
+      "calculate": "toNumber(datum['Export'])",
+      "as": "Export"
+    },
+    {
+      "window": [
+        {
+          "op": "count",
+          "as": "index"
+        }
+      ]
+    },
+    {
+      "fold": [
+        "Production",
+        "Consumption",
+        "Import",
+        "Export"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "min",
+          "field": "value",
+          "as": "min"
+        },
+        {
+          "op": "max",
+          "field": "value",
+          "as": "max"
+        }
+      ],
+      "groupby": [
+        "key"
+      ]
+    },
+    {
+      "calculate": "(datum.value - datum.min) / (datum.max - datum.min)",
+      "as": "norm_val"
+    },
+    {
+      "filter": "fuel_selection == 'All' || datum.Fuel_Type == fuel_selection"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#ccc"
+      },
+      "encoding": {
+        "detail": {
+          "aggregate": "count"
+        },
+        "x": {
+          "field": "key",
+          "type": "nominal",
+          "title": "Energy Flow Metrics",
+          "sort": [
+            "Production",
+            "Consumption",
+            "Import",
+            "Export"
+          ],
+          "scale": {
+            "padding": 0
+          }
+        }
+      }
+    },
+    {
+      "mark": "line",
+      "encoding": {
+        "color": {
+          "type": "nominal",
+          "field": "Fuel_Type",
+          "scale": {
+            "domain": [
+              "Coal",
+              "Natural gas",
+              "Oil"
+            ],
+            "range": [
+              "#4E79A7",
+              "#F28E2B",
+              "#59A14F"
+            ]
+          },
+          "title": "Fuel Type",
+          "legend": {
+            "orient": "right",
+            "offset": -100
+          }
+        },
+        "detail": {
+          "type": "nominal",
+          "field": "index"
+        },
+        "opacity": {
+          "value": 0.4
+        },
+        "x": {
+          "field": "key",
+          "type": "nominal",
+          "title": "Energy Flow Metrics",
+          "sort": [
+            "Production",
+            "Consumption",
+            "Import",
+            "Export"
+          ],
+          "scale": {
+            "padding": 0.2
+          }
+        },
+        "y": {
+          "type": "quantitative",
+          "field": "norm_val",
+          "axis": {
+            "title": "Normalised Value (Petajoules)",
+            "labels": false,
+            "grid": false,
+            "ticks": false,
+            "domain": false,
+            "titlePadding": -100
+          }
+        },
+        "tooltip": [
+          {
+            "type": "quantitative",
+            "field": "value",
+            "title": "Amount (Petajoules):",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "encoding": {
+        "x": {
+          "field": "key",
+          "type": "nominal",
+          "sort": [
+            "Production",
+            "Consumption",
+            "Import",
+            "Export"
+          ]
+        },
+        "y": {
+          "value": 0
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "style": "label",
+            "align": "left",
+            "dy": -10
+          },
+          "encoding": {
+            "text": {
+              "aggregate": "min",
+              "field": "max",
+              "format": ",.0f"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "tick",
+            "style": "tick",
+            "size": 8,
+            "color": "#ccc"
+          }
+        }
+      ]
+    },
+    {
+      "encoding": {
+        "x": {
+          "field": "key",
+          "type": "nominal",
+          "sort": [
+            "Production",
+            "Consumption",
+            "Import",
+            "Export"
+          ]
+        },
+        "y": {
+          "value": 0
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "tick",
+            "style": "tick",
+            "size": 8,
+            "color": "#ccc"
+          }
+        }
+      ]
+    }
+  ]
+}
